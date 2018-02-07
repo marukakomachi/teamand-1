@@ -1,0 +1,27 @@
+.page--blue__content {
+    background-color: blue;
+}
+
+ons-dialog p {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+input {
+  width: 100%;
+}
+
+.col {
+  border: 1px solid #ccc;
+  background: #fff;
+  overflow: hidden;
+  padding: 4px;
+  color: #999;
+}
+
+
+
+h3 {
+  color: #666;
+  font-size: 17px;
+}

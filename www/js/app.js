@@ -1,7 +1,7 @@
 // This is a JavaScript file
 var tasks = {
   dbName: "eatCheck", //dbの名前
-  dbVersion: 4,       //dbのバージョン
+  dbVersion: 5,       //dbのバージョン
   db: null            //dbをここに入れます
 };
 
@@ -29,7 +29,7 @@ tasks.init = function() {
     };
     request.onsuccess = function(event) { //アップデートが必要なく、接続できた場合の処理
         tasks.db = event.target.result;
-        alert("DBに接続成功");
+        //alert("DBに接続成功");
     };
     
 };
@@ -40,12 +40,14 @@ tasks.addTask = function() {
     var transaction = db.transaction("recipe","readwrite"); //処理用のトランザクションを作ります。
     var objectStore = transaction.objectStore("recipe"); //オブジェクトストアにアクセスします。
     var request = objectStore.put({ //オブジェクトストアに追加のリクエストします。
-            recipe_name:"TEST1",
-            recipe_memo:"MEMOMEMO",
-            comment:""
+            recipe_name:"キンピラゴボウ",recipe_memo:"MEMOMEMO",comment:""
     });
+    var request = objectStore.put({ //オブジェクトストアに追加のリクエストします。
+            recipe_name:"肉じゃが",recipe_memo:"MEMOMEMO",comment:""
+    });
+
     transaction.oncomplete = function() { //追加成功の処理
-        alert('保存成功');
+        //alert('保存成功');
     };
     transaction.onerror = function(error) { //追加失敗の処理
         alert('保存失敗。エラーメッセージ:', error);
@@ -67,7 +69,7 @@ document.addEventListener('show',function(event){
         request.onsuccess = function(event) {
             var cursor = event.target.result;
             if(cursor) {
-                ons.createElement('<ons-list-item>' + cursor.value.text + '</ons-list-item>', {append:list});
+                ons.createElement('<ons-list-item>' + cursor.valueOf(1) + '</ons-list-item>', {append:list});
                 cursor.continue();
             }
         };

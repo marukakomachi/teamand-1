@@ -1,7 +1,7 @@
 // This is a JavaScript file
 var tasks = {
   dbName: "eatCheck", //dbの名前
-  dbVersion: 2,       //dbのバージョン
+  dbVersion: 5,       //dbのバージョン
   db: null            //dbをここに入れます
 };
 
@@ -27,19 +27,30 @@ tasks.init = function() {
         alert("DBを作成しましたので、ページを更新します。");
         location.reload(); //作成した後、ページを更新する必要があります。
     };
-
     request.onsuccess = function(event) { //アップデートが必要なく、接続できた場合の処理
         tasks.db = event.target.result;
-        alert("DBに接続成功");
+        //alert("DBに接続成功");
     };
     
-    var transaction = tasks.db.transaction(tableName,"readwrite"); //処理用のトランザクションを作ります。
-    var recipeStore = transaction.objectStore(tableName); //オブジェクトストアにアクセスします。
-    var request = recipeStore.put({ //オブジェクトストアに追加のリクエストします。
-        name: 'TEST1', memo: 'MEMOMEMO'
+};
+
+//タスクの追加処理
+tasks.addTask = function() {
+    var db = tasks.db; //dbの指定
+    var transaction = db.transaction("recipe","readwrite"); //処理用のトランザクションを作ります。
+    var objectStore = transaction.objectStore("recipe"); //オブジェクトストアにアクセスします。
+    var request = objectStore.put({ //オブジェクトストアに追加のリクエストします。
+            recipe_name:"キンピラゴボウ",recipe_memo:"MEMOMEMO",comment:""
     });
+    var request = objectStore.put({ //オブジェクトストアに追加のリクエストします。
+            recipe_name:"肉じゃが",recipe_memo:"MEMOMEMO",comment:""
+    });
+
     transaction.oncomplete = function() { //追加成功の処理
-        alert('レコード保存成功');
+        //alert('保存成功');
+    };
+    transaction.onerror = function(error) { //追加失敗の処理
+        alert('保存失敗。エラーメッセージ:', error);
     };
 };
 
@@ -47,7 +58,9 @@ tasks.init = function() {
 document.addEventListener('show',function(event){
     var page = event.target;
     if(page.id == 'male') {
-        var list = page.querySelector('#memoList')
+        tasks.addTask();
+        var list = page.querySelector('#recipeList')
+        //ons.createElement('<ons-list-item modifier="chevron">キンピラゴボウ</ons-list-item>', {append:list});
         
         var db = tasks.db;
         var transaction = db.transaction("recipe","readonly");
@@ -56,8 +69,7 @@ document.addEventListener('show',function(event){
         request.onsuccess = function(event) {
             var cursor = event.target.result;
             if(cursor) {
-                alert('READ 1');
-                ons.createElement('<ons-list-item>' + cursor.toString() + '</ons-list-item>', {append:list});
+                ons.createElement('<ons-list-item>' + cursor.valueOf(1) + '</ons-list-item>', {append:list});
                 cursor.continue();
             }
         };

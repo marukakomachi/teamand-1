@@ -1,0 +1,30 @@
+<ons-page id="recipe_list" ng-controller="RecipeListController">
+  <ons-toolbar>
+    <div class="center">レシピ一覧</div>
+  </ons-toolbar>
+
+  <ons-list>
+
+    <ons-list-item modifier="chevron" class="item" 
+        ng-repeat="result in results"
+        ng-click="showDetailPage(result)">
+        
+      <ons-row>
+        <ons-col width="60px">
+          <div class="item-thum"></div>
+        </ons-col>
+        <ons-col>
+          <header>
+            <span class="item-title">{{result.col_name}}</span>
+            <span class="item-label">{{result.col_effect}}</span>
+          </header>
+          <p class="item-desc">
+            {{result.knowledge}}    
+          </p>
+        </ons-col>
+      </ons-row>
+      
+    </ons-list-item>
+
+  </ons-list>
+</ons-page>

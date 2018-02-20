@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "recipe_id": 1,
+        "trouble_id": 1
+    },
+    {
+        "id": 2,
+        "recipe_id": 1,
+        "trouble_id": 2
+    },
+    {
+        "id": 3,
+        "recipe_id": 1,
+        "trouble_id": 3
+    },
+    {
+        "id": 4,
+        "recipe_id": 2,
+        "trouble_id": 1
+    },
+    {
+        "id": 5,
+        "recipe_id": 2,
+        "trouble_id": 2
+    },
+    {
+        "id": 6,
+        "recipe_id": 3,
+        "trouble_id": 1
+    }
+]

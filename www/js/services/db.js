@@ -198,6 +198,7 @@ app.service('MyDBService',
                                     , a.col_name      as name \
                                     , a.col_effect    as effect \
                                     , a.col_knowledge as knowledge \
+                                    , a.col_imgPath   as imgPath \
                                     , group_concat(b.col_tag) as tags\
                                  FROM ' + mainTable.table_name + ' a \
                                  LEFT OUTER JOIN ' + relationTable.table_name + ' r \
